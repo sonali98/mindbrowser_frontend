@@ -1,0 +1,47 @@
+<div class="container w-50 p-5">
+    <div class="page-header">
+      <h2 style="text-align: center;">Add Employee</h2><br>
+    </div>
+      <form #addEmployeeForm="ngForm" (ngSubmit)="addEmployee()">
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" 
+          [(ngModel)]="employee.firstname" required #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched">
+          <small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">First Name is required field</small>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname" 
+          [(ngModel)]="employee.lastname" required #lastname="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched">
+          <small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">Last Name is required field</small>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter Address" name="address" 
+          [(ngModel)]="employee.address" required #address="ngModel" [class.is-invalid]="address.invalid && address.touched">
+          <small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is required field</small>
+        </div>
+        <div class="form-group">
+          <input type="date" class="form-control" placeholder="Enter Birthdate" name="birthdate" 
+          [(ngModel)]="employee.birthdate">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter Mobile No." name="mobile" 
+          [(ngModel)]="employee.mobile" required #mobile="ngModel" [class.is-invalid]="mobile.invalid && mobile.touched"
+          pattern="^[789]\d{9}$">
+          <div *ngIf="mobile.errors && mobile.invalid && mobile.touched">
+            <small class="text-danger" *ngIf="mobile.errors.required">Mobile no. is required field</small>
+            <small class="text-danger" *ngIf="mobile.errors.pattern">Enter valid Mobile No.</small>
+        </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter City" name="city" 
+          [(ngModel)]="employee.city" required #city="ngModel" [class.is-invalid]="city.invalid && city.touched">
+          <small class="text-danger" [class.d-none]="city.valid || city.untouched">City is required field</small>
+        </div>
+        
+        <button [disabled]="addEmployeeForm.form.invalid" type="submit" class="btn btn-info">Submit</button>&nbsp;
+        <button type="button" class="btn btn-info" (click)="gotolist()">Back</button>
+      </form>
+      
+</div>
+    
+  

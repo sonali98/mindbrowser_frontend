@@ -1,0 +1,62 @@
+<div class="container w-50 p-2">
+  <div class="page-header">
+    <h2 style="text-align: center;">Manager Signup</h2><br>
+  </div>
+    <form #loginForm="ngForm" (ngSubmit)="signupUser()">
+      <small class="text-danger">{{msg}}</small>  
+      <div class="form-group">
+        <!-- <label for="email">Email:</label> -->
+        <input type="email" class="form-control" placeholder="Enter email" name="email" 
+           [(ngModel)]="user.email" required #email="ngModel" 
+           [class.is-invalid]="email.invalid && email.touched"
+           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <!-- <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email Id is required field.</small> -->
+        <div *ngIf="email.errors && email.invalid && email.touched">
+            <small class="text-danger" *ngIf="email.errors.required">Email Id is required field</small>
+            <small class="text-danger" *ngIf="email.errors.pattern">Enter valid emailId</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" 
+        [(ngModel)]="user.firstname" required #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched">
+        <small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">First Name is required field</small>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname" 
+        [(ngModel)]="user.lastname" required #lastname="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched">
+        <small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">Last Name is required field</small>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Enter Password" name="password" [(ngModel)]="user.password" required #password="ngModel"
+        [class.is-invalid]="password.invalid && password.touched" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        <div *ngIf="password.errors && password.invalid && password.touched">
+            <small class="text-danger" *ngIf="password.errors.required">Password is required field</small>        
+            <small class="text-danger" *ngIf="password.errors.pattern">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Confirm Password" name="cpassword" #cpassword="ngModel" 
+        (ngModel)="user.password" required [class.is-invalid]="password.invalid && password.touched">
+            <small class="text-danger" [class.d-none]="cpassword.value == password.value || cpassword.untouched">Password and confirm password must be the same</small>        
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter Address" name="address" 
+        [(ngModel)]="user.address" required #address="ngModel" [class.is-invalid]="address.invalid && address.touched">
+        <small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is required field</small>
+      </div>
+      <div class="form-group">
+        <input type="date" class="form-control" placeholder="Enter Birthdate" name="birthdate" 
+        [(ngModel)]="user.birthdate">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter Company Name" name="company" 
+        [(ngModel)]="user.company" required #company="ngModel" [class.is-invalid]="company.invalid && company.touched">
+        <small class="text-danger" [class.d-none]="company.valid || company.untouched">Company is required field</small>
+      </div>
+      
+      <button [disabled]="loginForm.form.invalid" type="submit" class="btn btn-info float-right">Signup</button>
+      
+    </form>
+    <button type="submit" class="btn btn-info float-right mr-2" [routerLink]="['/login']">Login</button>
+  </div>
+  
